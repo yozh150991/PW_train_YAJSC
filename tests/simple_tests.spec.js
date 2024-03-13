@@ -2,10 +2,10 @@ const { test, expect } = require('@playwright/test');
 
 test.describe("Simple tests", () =>{
     test.beforeEach(async ({page}) =>{
-        const username = page.getByTestId('username');
-        const password = page.getByTestId('password');
-        const login_btn = page.getByTestId('login-button');
-        await page.goto('/');
+        const username = page.locator('#user-name');
+        const password = page.locator('#password');
+        const login_btn = page.locator('#login-button');
+        await page.goto('https://www.saucedemo.com/');
         await username.fill('standard_user')
         await password.fill('secret_sauce');
         await login_btn.click();
@@ -25,7 +25,7 @@ test.describe("Simple tests", () =>{
         expect(await inventory_item.count()).toBeGreaterThan(1);
     });
     test("Add product to the cart",async ({page}) =>{
-        const addFirstItemToCart_btn = page.getByTestId('add-to-cart-sauce-labs-backpack');
+        const addFirstItemToCart_btn = page.locator('#add-to-cart-sauce-labs-backpack');
         const shoppingCartBadge = page.locator('.shopping_cart_badge');
         const shoppingcart_icon = page.locator('.shopping_cart_link');
         const cartItem = page.textContent('.inventory_item_name');
@@ -35,7 +35,7 @@ test.describe("Simple tests", () =>{
         expect(await shoppingCartBadge.textContent()).toBe('1');
         await shoppingcart_icon.click();
         expect(await cartItem).toBe(/*pickedItem*/'Sauce Labs Backpack');
-        await page.getByTestId('remove-sauce-labs-backpack').click();
+        await page.locator('#remove-sauce-labs-backpack').click();
         expect(await shoppingCartBadge.count()).toBe(0);
     });
 })
