@@ -1,6 +1,6 @@
 const { test, expect } = require('@playwright/test');
 
-test.describe("Simple tests", () =>{
+test.describe("Adding and removing product from the cart for authorized user", () =>{
     test.beforeEach(async ({page}) =>{
         const username = page.locator('#user-name');
         const password = page.locator('#password');
@@ -29,12 +29,10 @@ test.describe("Simple tests", () =>{
         const shoppingCartBadge = page.locator('.shopping_cart_badge');
         const shoppingcart_icon = page.locator('.shopping_cart_link');
         const cartItem = page.textContent('.inventory_item_name');
-        //let pickedItem = undefined;
         await addFirstItemToCart_btn.click();
-        //pickedItem = addFirstItemToCart_btn.textContent();
         expect(await shoppingCartBadge.textContent()).toBe('1');
         await shoppingcart_icon.click();
-        expect(await cartItem).toBe(/*pickedItem*/'Sauce Labs Backpack');
+        expect(await cartItem).toBe('Sauce Labs Backpack');
         await page.locator('#remove-sauce-labs-backpack').click();
         expect(await shoppingCartBadge.count()).toBe(0);
     });

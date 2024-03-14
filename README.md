@@ -3,7 +3,7 @@
 ## Requirements
 
 - NodeJS
-- VSCode
+- VSCode, Webstorm and other IDE for writing JS code
 - Playwright installed
 
 ## Setup
